@@ -1,0 +1,14 @@
+.App-header {
+  font-size: calc(10px + 2vmin);
+}
+
+
+
+.dropdown-menu {
+  width: 300px !important;
+  height: 400px !important;
+}
+.dropdown-menu-cadastro {
+  width: 300px !important;
+  height: 500px !important;
+}
