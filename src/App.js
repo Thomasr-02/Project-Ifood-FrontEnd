@@ -1,18 +1,17 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
-import Navbar from './components/navbar.js'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Navbar from './components/navbarCadastroLogin.js'
+import background from './back-image.jpg'
 
-function App() {
-  return (
-    <div className="App">
-      <Navbar/>
-      <header className="App-header">
-          
-      </header>
-      
-    </div>
-  );
+
+export default class App extends Component {
+  render () {
+    return (
+      <div className="container">
+        <Navbar />
+        <img className="background" src={background}></img>
+      </div>
+    
+    );
+  }
 }
-
-export default App;

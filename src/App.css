@@ -1,14 +1,61 @@
-.App-header {
-  font-size: calc(10px + 2vmin);
+body, html  {  	
+	margin: 0;  	
+	padding: 0;  	
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%; 
+  width: 100%;
+  
+}   
+
+.background {
+  transform: translateX(100px);
+  transform: scale(1, 1);
+  
 }
-
-
 
 .dropdown-menu {
-  width: 300px !important;
-  height: 400px !important;
+  width: 300px;
+  height: 450px;
 }
 .dropdown-menu-cadastro {
-  width: 300px !important;
-  height: 500px !important;
+  width: 300px;
+  height: 450px;
+}
+
+.Cadastro {
+  margin-left: 500px;
+}
+
+.Search {
+  justify-content: center;
+}
+
+#ButtonLogout {
+  margin-left: 700px;
+
+}
+
+#form-search {
+  display: 'flex';
+  margin-left: '500px';
+}
+#containerCategorias {
+  /* text-align: center; */
+  border: 5px ;
+  padding: .5rem;
+  width: 300px;
+  margin: 20px
+}
+
+#CardsRestaurantes {
+  
+  border: 10px;
+  width: 800px;
+  padding: 20px;
+}
+
+.cards {
+  align-items: center;
 }
