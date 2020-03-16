@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import '../App.css';
 import api from '../services/api'
+import {logout} from '../services/auth'
+import {Link} from 'react-router-dom'
 
 export default class Home extends Component {
 
@@ -8,13 +10,18 @@ export default class Home extends Component {
         restaurantes: [],
     }
 
+    Logout() {
+        logout();
+        
+    }
+
+    // api.get('/restaurantes?q='+ e.target.value)
     HandleSearch = (e) => {
-        api.get('/restaurantes?q='+ e.target.value)
+        api.get('/restaurantes')
         .then(res => {
             const restaurantes = res.data;
             this.setState( { restaurantes } );
             console.log(restaurantes.length)
-            
         
         }).catch((err) => {
             console.log(err)
@@ -28,7 +35,10 @@ export default class Home extends Component {
                     <input className="form-control mr-sm-2 " onChange= { this.HandleSearch } type="search" placeholder="Pesquisa restaurante/prato" aria-label="Search"></input>
                     
                 </form>
-                <button styles={styles.logout}className="col-xs-6" >Logout</button>
+                <Link to="/">
+                    <button styles={styles.logout}className="col-xs-6" onClick={this.Logout}>Logout</button>
+                </Link>
+                
           </div>
           <div className="container border row d-flex justify-content-center" id="containerCategorias">
             <div className="row" id="containerCategorias">
@@ -51,7 +61,7 @@ export default class Home extends Component {
         {/* cards */}
         { 
             this.state.restaurantes.map (restaurantes => (
-            <div key={restaurantes.id_person} className = "container border" id="CardsRestaurantes">
+            <div key={restaurantes.id_estabilishment} className = "container border" id="CardsRestaurantes">
                 
                 <div className="cards">
                     <h5>Restaurante : {restaurantes.name_estab}</h5>

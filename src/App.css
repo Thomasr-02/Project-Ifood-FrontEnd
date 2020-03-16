@@ -24,6 +24,10 @@ body, html  {
   height: 450px;
 }
 
+.Teste {
+  display: flex;
+  justify-content: center;
+}
 .Cadastro {
   margin-left: 500px;
 }
@@ -36,13 +40,18 @@ body, html  {
   margin-left: 700px;
 
 }
-
+#Login {
+  width: 200px;
+  margin-right: 2000px;
+  display: grid;
+  
+  
+}
 #form-search {
   display: 'flex';
   margin-left: '500px';
 }
 #containerCategorias {
-  /* text-align: center; */
   border: 5px ;
   padding: .5rem;
   width: 300px;
