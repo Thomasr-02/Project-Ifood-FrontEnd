@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import HomeUser from './homeUser'
-import HomeRestaurante from './homeRestaurante'
+import HomeRestaurante from './HomeRestaurante'
 import Inicio from '../components/navbarCadastroLogin'
 
 import { isAuthenticated } from "../services/auth";
