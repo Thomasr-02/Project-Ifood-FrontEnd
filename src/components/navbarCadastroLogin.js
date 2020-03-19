@@ -12,6 +12,11 @@ class CadastroLogin extends Component {
         email: '',
         password: '',
         
+        city: '',
+        neighborhood:'',
+        street:'',
+        number:'',
+
         name_estab: '', 
         delivery_free: false, 
         category: '', 
@@ -25,11 +30,15 @@ class CadastroLogin extends Component {
         var email = document.querySelector('#formEmail').value;
         var password = document.querySelector('#formPassword').value;
         
-        api.post('/users',{first_name, last_name, email, password})
+        var city= document.querySelector('#formCity').value;
+        var neighborhood= document.querySelector('#formNeighborhood').value;
+        var street= document.querySelector('#formStreet').value;
+        var number= document.querySelector('#formNumber').value;
+
+
+        api.post('/users',{first_name, last_name, email, password,city,neighborhood,street,number})
         .then((res) => {
             console.log(res);
-            setTimeout(function(){ console.log("deubom"); }, 3000);
-
         }).catch((err) => {
             alert("error: " + err.toString());
         });
@@ -40,11 +49,20 @@ class CadastroLogin extends Component {
         var name_estab = document.querySelector('#estab_name').value;
         var email = document.querySelector('#estab_formEmail').value;
         var password = document.querySelector('#estab_formPassword').value;
+
+        var city= document.querySelector('#formCity').value;
+        var neighborhood= document.querySelector('#formNeighborhood').value;
+        var street= document.querySelector('#formStreet').value;
+        var number= document.querySelector('#formNumber').value;
+
+
+
+
         var delivery_free = true;
         var category = '';
         var balance = 0
 
-        api.post('/restaurantes',{name_estab, email, password, delivery_free, category, balance })
+        api.post('/restaurantes',{name_estab, email, password, delivery_free, category, balance ,city,neighborhood,street,number})
         .then((res) => {
             alert(res);
             
@@ -87,7 +105,23 @@ class CadastroLogin extends Component {
                                             <label htmlFor="formPassword">Senha</label>
                                             <input type="password" className="form-control" id="formPassword" placeholder="Senha"/>
                                         </div>
-                                        
+                                        <div><h4>Info endereço</h4></div>
+                                        <div className="form-group">
+                                            <label htmlFor="formCity">Cidade</label>
+                                            <input type="password" className="form-control" id="formCity" placeholder="Ex: Joao Pessoa"/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="formNeighborhood">Municipio</label>
+                                            <input type="password" className="form-control" id="formNeighborhood" placeholder="Ex: Mangabeira"/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="formStreet">Rua</label>
+                                            <input type="password" className="form-control" id="formStreet" placeholder="Ex: Rua dos escoteiros"/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="formNumber">Numero</label>
+                                            <input type="password" className="form-control" id="formNumber" placeholder="Ex: 152"/>
+                                        </div>
                                         <button onClick={this.cadaUser} className="btn btn-primary">Cadastrar-se</button>
                                     </form>
                                 </Dropdown.Menu>
@@ -116,7 +150,24 @@ class CadastroLogin extends Component {
                                             <label htmlFor="formPassword">Senha</label>
                                             <input type="password" className="form-control" id="estab_formPassword" placeholder="Senha"/>
                                         </div>
-                                        
+                                        <div><h4>Info endereço</h4></div>
+                                        <div className="form-group">
+                                            <label htmlFor="formCity">Cidade</label>
+                                            <input type="password" className="form-control" id="formCity" placeholder="Ex: Joao Pessoa"/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="formNeighborhood">Municipio</label>
+                                            <input type="password" className="form-control" id="formNeighborhood" placeholder="Ex: Mangabeira"/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="formStreet">Rua</label>
+                                            <input type="password" className="form-control" id="formStreet" placeholder="Ex: Rua dos escoteiros"/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="formNumber">Numero</label>
+                                            <input type="password" className="form-control" id="formNumber" placeholder="Ex: 152"/>
+                                        </div>
+                                     
                                         <button onClick={this.cadaRestaurante} className="btn btn-primary">Cadastrar-se</button>
                                     </form>
                                 </Dropdown.Menu>
