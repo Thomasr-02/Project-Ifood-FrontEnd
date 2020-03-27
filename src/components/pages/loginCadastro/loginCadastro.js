@@ -1,8 +1,11 @@
 import { Nav, Dropdown } from 'react-bootstrap';
 import React, {Component} from 'react';
-import api from '../services/api'
-import Login from './Login'
-import {withRouter} from 'react-router-dom'
+import api from '../../../services/api'
+// import Login from './Login'
+import Login from './components/login/login'
+import { withRouter } from 'react-router-dom'
+import './loginCadastro.css'
+import Cadastro from './components/cadastro/cadastro'
 
 class CadastroLogin extends Component {
 
@@ -62,7 +65,7 @@ class CadastroLogin extends Component {
 
         api.post('/restaurantes',{name_estab, email, password, delivery_free, category, balance ,city,neighborhood,street,number})
         .then((res) => {
-            alert(res);
+            alert("Cadastrado com sucesso!");
             
         }).catch((err) => {
             alert("error: " + err.toString());
@@ -72,8 +75,11 @@ class CadastroLogin extends Component {
 
     render () {
         return (
-            <div className="Teste">
-                <Nav className="justify-content" id="mynav">
+            <div className="loginCadastro">
+                <Login/>
+                <Cadastro/>
+                
+                {/* <Nav className="justify-content" id="mynav">
                     <Login/>
                     <div className="Cadastro">
                         <div className="btn">         
@@ -83,7 +89,7 @@ class CadastroLogin extends Component {
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu className="dropdown-menu-cadastro">
-                                    <form className="px-4 py-3">
+                                    <form className="">
                                         <div className="form-group">
                                             <label htmlFor="formNome1">Primeiro Nome</label>
                                             <input className="form-control" id="formNome1" placeholder="Primeiro nome"/>
@@ -172,7 +178,7 @@ class CadastroLogin extends Component {
                             </Dropdown>
                         </div>
                     </div>
-                </Nav>
+                </Nav> */}
             </div>
         );
     }

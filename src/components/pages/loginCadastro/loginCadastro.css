@@ -1,0 +1,15 @@
+html,body  {  	
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100%; 
+    width: 100%;
+    background-image: url("../../../assets/back-image.jpg");
+    background-position: left;
+    background-color: rgb(228, 176, 176);
+    
+}
+.loginCadastro {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+}

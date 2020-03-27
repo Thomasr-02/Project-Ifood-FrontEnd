@@ -2,7 +2,7 @@ import React                                      from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import HomeUser                                   from './pages/homeUser/homeUser'
 import HomeRestaurante                            from './pages/homeRestaurante/homeRestaurante'
-import Inicio                                     from '../components/navbarCadastroLogin'
+import Inicio                                     from './pages/loginCadastro/loginCadastro'
 import { isAuthenticated }                        from "../services/auth";
 
 const PrivateRouteUser = ({ component: Component, ...rest }) => (

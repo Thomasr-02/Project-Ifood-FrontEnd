@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { logout, isId_estab } from '../../../services/auth.js'
 import api from '../../../services/api'
-import { Link } from 'react-router-dom'
 import "./homeRestaurante.css"
 import { Form, Button } from 'react-bootstrap';
+
+import NaveHomeRestaurante from './components/naveHomeRestaurante'
+import Situacao from './components/situacao'
 
 
 export default class HomeRestaurante extends Component {
@@ -72,25 +74,10 @@ export default class HomeRestaurante extends Component {
     render() {
         return (
             <div className="homeRestaurante">
-                <div className="naveHomeRestaurante">
-                    <div className="buttonsRelatorios">
-                        <button className="button" >Emitir relatorio 1</button> 
-                        <button className="button" >Emitir relatorio 2</button>
-                        
-                        <Link to="/"> 
-                            <button className="button" id="buttonLogoutRestaurante" onClick={this.Logout}>Logout</button> 
-                        </Link>  
-                    </div>
-                </div>
+                <NaveHomeRestaurante />
 
-                <ul className="situacao">
-                    <h2>Situação restaurante</h2>
-                    <Form.Check label = "Aberto"/>
-                    <Form.Check label = "Fechado"/>
-                    <Form.Check label = "Entrega grátis"/>
-                    <Form.Check label = "Entrega rápida"/>                    
-                </ul>
-
+                <Situacao/>
+                
                 <div className="grid-container">
                     <div className="addPrato">
                         <h2>Adicionar prato</h2>

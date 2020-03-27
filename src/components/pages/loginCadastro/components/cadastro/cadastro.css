@@ -1,0 +1,45 @@
+.cadastro {
+    position: relative;
+    /* margin-top: 20px; */
+
+}
+
+.cadastroForm {
+    position: relative;
+    margin-right: 20px;
+    
+    height: 585px;
+    width: 500px;
+
+    background-color: rgb(255, 255, 255);
+}
+
+.grid-container-cadastro {
+    display: grid;
+    grid-template-columns: auto auto;
+
+}
+.gridInput {
+    display: grid;
+    padding: 20px;
+    width: 100%;
+
+}
+
+.inputCadastro {
+    grid-template-columns: auto auto;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.button-cadastro {
+    position: absolute;
+    right: 0;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.menu-cadastro {
+    background-color: rgb(228, 176, 176);
+}

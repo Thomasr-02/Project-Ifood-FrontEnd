@@ -1,0 +1,20 @@
+
+
+.login {
+    /* margin: 20px; */
+    text-align: left;
+    width: 30%;
+}
+
+.dropdownLogin {
+    margin: 20px;
+}
+
+.formLogin {
+    
+    border-radius: 5px;
+    margin: 20px;
+    text-align: auto;
+    padding: 5px;
+}
+
