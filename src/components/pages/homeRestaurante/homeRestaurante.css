@@ -1,0 +1,83 @@
+.homeRestaurante {
+    background-color: white;
+    height: 1000px;
+    padding-top: 10px;
+    
+}
+
+.naveHomeRestaurante {
+    position: relative;
+    
+}
+
+.situacao {
+    border: 2px solid grey;
+    border-radius: 5px;
+    height: 175px;
+    margin: 10px;
+    width: 400px;
+}
+
+.buttonsRelatorios {
+    position: absolute;
+    right: 0;
+    padding: 20px;
+    
+}
+
+.button {
+    margin: 10px;
+}
+
+.formAddPrato {
+    width: 200px;
+}
+
+.addPrato {
+    text-align: center;
+    justify-items: center;
+    position: relative;
+    width: 350px;
+    height: 450px;
+    border: 1px solid grey;
+    padding: 20px;
+    margin: 40px;
+    margin-top: 40px;
+}
+
+.input {
+    margin: 20px;
+}
+
+#buttonAddPrato {
+    position: absolute;
+    right: 0;
+    
+}
+
+.containerListaPratos {
+    position: relative;
+    right: 0;
+    border: 1px solid grey;
+    width: 500px;
+    height: 100%;
+    text-align: center;
+    margin-right: 50px;
+    
+}
+
+.container-cards-dishes {
+    margin: 20px;
+    
+}
+
+.dishesCards {
+    padding-top: 10px;
+    border: 1px solid red;
+    border-radius: 10px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto
+}

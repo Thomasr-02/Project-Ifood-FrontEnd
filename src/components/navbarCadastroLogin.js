@@ -36,7 +36,7 @@ class CadastroLogin extends Component {
         var number= document.querySelector('#formNumber').value;
 
 
-        api.post('/users',{first_name, last_name, email, password,city,neighborhood,street,number})
+        api.post('/users',{first_name, last_name, email, password, city, neighborhood, street,number})
         .then((res) => {
             console.log(res);
         }).catch((err) => {
@@ -54,8 +54,6 @@ class CadastroLogin extends Component {
         var neighborhood= document.querySelector('#formNeighborhood').value;
         var street= document.querySelector('#formStreet').value;
         var number= document.querySelector('#formNumber').value;
-
-
 
 
         var delivery_free = true;
@@ -108,19 +106,19 @@ class CadastroLogin extends Component {
                                         <div><h4>Info endereço</h4></div>
                                         <div className="form-group">
                                             <label htmlFor="formCity">Cidade</label>
-                                            <input type="password" className="form-control" id="formCity" placeholder="Ex: Joao Pessoa"/>
+                                            <input type="text" className="form-control" id="formCity" placeholder="Ex: Joao Pessoa"/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="formNeighborhood">Municipio</label>
-                                            <input type="password" className="form-control" id="formNeighborhood" placeholder="Ex: Mangabeira"/>
+                                            <input type="text" className="form-control" id="formNeighborhood" placeholder="Ex: Mangabeira"/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="formStreet">Rua</label>
-                                            <input type="password" className="form-control" id="formStreet" placeholder="Ex: Rua dos escoteiros"/>
+                                            <input type="text" className="form-control" id="formStreet" placeholder="Ex: Rua dos escoteiros"/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="formNumber">Numero</label>
-                                            <input type="password" className="form-control" id="formNumber" placeholder="Ex: 152"/>
+                                            <input type="text" className="form-control" id="formNumber" placeholder="Ex: 152"/>
                                         </div>
                                         <button onClick={this.cadaUser} className="btn btn-primary">Cadastrar-se</button>
                                     </form>
@@ -153,19 +151,19 @@ class CadastroLogin extends Component {
                                         <div><h4>Info endereço</h4></div>
                                         <div className="form-group">
                                             <label htmlFor="formCity">Cidade</label>
-                                            <input type="password" className="form-control" id="formCity" placeholder="Ex: Joao Pessoa"/>
+                                            <input type="text" className="form-control" id="formCity" placeholder="Ex: Joao Pessoa"/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="formNeighborhood">Municipio</label>
-                                            <input type="password" className="form-control" id="formNeighborhood" placeholder="Ex: Mangabeira"/>
+                                            <input type="text" className="form-control" id="formNeighborhood" placeholder="Ex: Mangabeira"/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="formStreet">Rua</label>
-                                            <input type="password" className="form-control" id="formStreet" placeholder="Ex: Rua dos escoteiros"/>
+                                            <input type="text" className="form-control" id="formStreet" placeholder="Ex: Rua dos escoteiros"/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="formNumber">Numero</label>
-                                            <input type="password" className="form-control" id="formNumber" placeholder="Ex: 152"/>
+                                            <input type="text" className="form-control" id="formNumber" placeholder="Ex: 152"/>
                                         </div>
                                      
                                         <button onClick={this.cadaRestaurante} className="btn btn-primary">Cadastrar-se</button>

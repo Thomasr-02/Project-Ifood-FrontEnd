@@ -1,10 +1,9 @@
-import React from "react";
+import React                                      from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import HomeUser from './homeUser'
-import HomeRestaurante from './homeRestaurante'
-import Inicio from '../components/navbarCadastroLogin'
-
-import { isAuthenticated } from "../services/auth";
+import HomeUser                                   from './pages/homeUser/homeUser'
+import HomeRestaurante                            from './pages/homeRestaurante/homeRestaurante'
+import Inicio                                     from '../components/navbarCadastroLogin'
+import { isAuthenticated }                        from "../services/auth";
 
 const PrivateRouteUser = ({ component: Component, ...rest }) => (
   <Route
@@ -35,11 +34,10 @@ const PrivateRouteRestaurante = ({ component: Component, ...rest }) => (
 const Routes = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={Inicio} />
-      {/* <Route path="/home" component={() => <h1>SignUp</h1>} /> */}
-      <PrivateRouteUser path="/homeUser" component={HomeUser} />
+      <Route exact path="/" component=                           {Inicio}          />
+      <PrivateRouteUser path="/homeUser" component=              {HomeUser}        />
       <PrivateRouteRestaurante path="/homeRestaurante" component={HomeRestaurante} />
-      <Route path="*" component={() => <h1>Page not found</h1>} />
+      <Route path="*" component={() => <h1>Page not found</h1>}                    />
     </Switch>
   </BrowserRouter>
 );
