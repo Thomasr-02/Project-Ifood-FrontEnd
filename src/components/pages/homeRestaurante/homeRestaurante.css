@@ -17,6 +17,15 @@
     margin: 10px;
     width: 400px;
 }
+.abertoFechado {
+    margin-right: 70px;
+    text-align: left;
+    margin-top: 10px;
+}
+.frete {
+    margin-right: 20px;
+    text-align: left;
+}
 
 .buttonsRelatorios {
     position: absolute;

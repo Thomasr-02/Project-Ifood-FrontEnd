@@ -101,7 +101,7 @@ export default class HomeRestaurante extends Component {
                                 <div key={dishes.id_dish} className = "container-cards-dishes">
                                     <div className="dishesCards">
                                         <h5>Nome do prato: {dishes.name_dish}</h5>
-                                        <p>Preço: {dishes.value_dish}</p>
+                                        <p>Preço: R$ {dishes.value_dish}</p>
                                         <p>Descrição: {dishes.description_dish}</p>
                                         <p></p>
                                         <button type="submit" value={ dishes.id_dish } onClick={this.removeDish} className="btn btn-primary" >Remover</button>

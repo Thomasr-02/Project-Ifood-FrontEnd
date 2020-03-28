@@ -6,10 +6,15 @@ export class Situacao extends Component {
         return (
             <ul className="situacao">
                 <h2>Situação restaurante</h2>
-                <Form.Check label = "Aberto"/>
-                <Form.Check label = "Fechado"/>
-                <Form.Check label = "Entrega grátis"/>
-                <Form.Check label = "Entrega rápida"/>                    
+                <div className="abertoFechado">
+                    <label className="abertoFechado" > <input type="radio" name="open" checked></input> Aberto </label>
+                    <label className="abertoFechado" > <input type="radio" name="closed"></input> Fechado </label>
+                </div>
+
+                <div className="frete">
+                    <label className="frete" > <input type="radio" name="delivery_fee" checked></input> Entrega grátis </label>
+                    <label className="frete" > <input type="radio" name="delivery_fast"></input> Entrega rápida </label>
+                </div>                   
             </ul>
         )
     }
