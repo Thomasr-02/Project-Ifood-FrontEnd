@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { logout, isId_estab } from '../../../services/auth.js'
+import { logout, isId_estab, TOKEN_KEY2 } from '../../../services/auth.js'
 import api from '../../../services/api'
 import "./homeRestaurante.css"
 import { Form, Button } from 'react-bootstrap';
@@ -27,12 +27,12 @@ export default class HomeRestaurante extends Component {
     }
 
     componentDidMount () {
-        api.get('/dishOfRestaurantes/' + isId_estab("@airbnb-Token2"))
+        api.get('/dishOfRestaurantes/' + isId_estab(TOKEN_KEY2))
                 .then(res => {
                     const dishes = res.data;
                     
                     this.setState( { dishes } );
-                    this.setState({ fk_establishment_id_establishment: isId_estab("@airbnb-Token2") })
+                    this.setState({ fk_establishment_id_establishment: isId_estab(TOKEN_KEY2) })
                 
                 }).catch((err) => {
                     console.log(err)

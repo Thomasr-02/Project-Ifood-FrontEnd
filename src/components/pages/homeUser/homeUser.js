@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import './homeUser.css';
 import api from '../../../services/api'
-import {logout} from '../../../services/auth.js'
-import {Link} from 'react-router-dom'
+import { logout } from '../../../services/auth.js'
 import  NaveHomeUser from './components/naveHomeUser'
 
 export default class Home extends Component {
@@ -63,9 +62,11 @@ export default class Home extends Component {
             </div>
             {/* cards */}
             <div className="cardsRestaurantes">
+                <h3>Restaurantes</h3>
+                <br></br>
                 { 
                     this.state.restaurantes.map (restaurantes => (
-                    <div key={restaurantes.id_establishment} className = "container border" id="CardsRestaurantes">
+                    <div key={restaurantes.id_establishment} className = "container-cards-restaurantes">
                         
                         <div className="cards">
                             <h5>Restaurante: {restaurantes.name_estab}</h5>
@@ -85,11 +86,4 @@ export default class Home extends Component {
       </div>
     );
   }
-}
-
-var styles = {
-    logout: {
-        marginLeft: 550,
-    },
-
 }

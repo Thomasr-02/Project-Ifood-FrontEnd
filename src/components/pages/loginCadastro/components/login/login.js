@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Dropdown } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
-import { login, isId_estab } from "../../../../../services/auth";
+import { login, TOKEN_KEY2 } from "../../../../../services/auth";
 
 import './login.css'
 import api from '../../../../../services/api'
@@ -31,21 +31,19 @@ export class Login extends Component {
   
               if (response.data[0].id_person !== undefined) {
                   login(response.data.token);
+                  localStorage.setItem(TOKEN_KEY2, response.data[0].id_establishment);
                   this.props.history.push("/homeUser");
                   
               }
               else if(response.data[0].id_establishment !== undefined) {
                   login(response.data.token);
-                  localStorage.setItem('@airbnb-Token2', response.data[0].id_establishment);
+                  localStorage.setItem(TOKEN_KEY2, response.data[0].id_establishment);
                   this.props.history.push("/homeRestaurante");
   
               }
   
             }catch (err) {
-              this.setState({
-                  error: "Algo de errado nao esta certo"
-                  
-              });
+              this.setState({ error: "Algo de errado nao esta certo" });
             }
           }
       }
@@ -58,11 +56,12 @@ export class Login extends Component {
                         Login
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        
+                        {this.state.err}
                         <form className="formLogin" >
                             <h2>Login</h2>
                             <input className="formLogin" id="email" onChange={this.handle} placeholder="examplo@hotmail.com" type="email"></input>
                             <input className="formLogin" id="password" onChange={this.handle} placeholder="Senha" type="password"></input>
+                           
                             <button className="formLogin" onClick={this.login}> Entrar</button>
                             
                         </form>

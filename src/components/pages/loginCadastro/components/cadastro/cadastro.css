@@ -7,16 +7,15 @@
 .cadastroForm {
     position: relative;
     margin-right: 20px;
-    
-    height: 585px;
     width: 500px;
-
     background-color: rgb(255, 255, 255);
+    padding-left: 20px;
 }
 
 .grid-container-cadastro {
     display: grid;
     grid-template-columns: auto auto;
+    justify-items: center;
 
 }
 .gridInput {
@@ -34,12 +33,17 @@
 }
 
 .button-cadastro {
-    position: absolute;
     right: 0;
-    margin: 20px;
+    margin: 10px;
     border-radius: 5px;
 }
 
 .menu-cadastro {
-    background-color: rgb(228, 176, 176);
+    background-color: rgb(224, 44, 44);
+}
+
+.container-error {
+    color: rgb(252, 209, 19);
+    text-align: center;
+    background-color: white;
 }
