@@ -6,7 +6,7 @@ import Inicio                                     from './pages/loginCadastro/lo
 import { isAuthenticated }                        from "../services/auth";
 import Compras                                    from './pages/compras/compras'
 
-const PrivateRouteUser = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
@@ -19,27 +19,15 @@ const PrivateRouteUser = ({ component: Component, ...rest }) => (
   />
 );
 
-const PrivateRouteRestaurante = ({ component: Component, ...rest }) => (
-    <Route
-      {...rest}
-      render={props =>
-        isAuthenticated() ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to={{ pathname: "/", state: { from: props.location } }} />
-        )
-      }
-    />
-  );
-
 const Routes = () => (
+  
   <BrowserRouter>
     <Switch>
-      <Route            exact  path="/"                 component={ Inicio }/>
-      <PrivateRouteUser exact  path="/homeUser"         component={ HomeUser }/>
-      <PrivateRouteUser exact  path="/homeUser/compras" component={ Compras }/>
-      <PrivateRouteRestaurante exact path="/homeRestaurante"  component={ HomeRestaurante }/>
-      <Route                   path="*"                 component={() => <h1>Page not found</h1>}/>
+      <Route        exact path="/"                 component={ Inicio                      }/>
+      <PrivateRoute exact path="/homeUser"         component={ HomeUser                    }/>
+      <PrivateRoute exact path="/homeUser/compras" component={ Compras                     }/>
+      <PrivateRoute exact path="/homeRestaurante"  component={ HomeRestaurante             }/>
+      <Route              path="*"                 component={() => <h1>Page not found</h1>}/>
     </Switch>
   </BrowserRouter>
 );

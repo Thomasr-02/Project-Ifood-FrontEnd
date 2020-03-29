@@ -27,6 +27,11 @@
     text-align: left;
 }
 
+.container-situacao {
+    margin: 10px;
+    
+}
+
 .buttonsRelatorios {
     position: absolute;
     right: 0;

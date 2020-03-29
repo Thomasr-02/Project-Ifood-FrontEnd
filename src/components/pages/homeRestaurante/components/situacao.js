@@ -3,18 +3,26 @@ import React, { Component } from 'react'
 export class Situacao extends Component {
     render() {
         return (
-            <ul className="situacao">
-                <h2>Situação restaurante</h2>
-                <div className="abertoFechado">
-                    <label className="abertoFechado" > <input type="radio" name="open" checked></input> Aberto </label>
-                    <label className="abertoFechado" > <input type="radio" name="closed"></input> Fechado </label>
-                </div>
+            <form className="situacao">
+                <div className="container-situacao">
+                    <div className="abertoFechado">
+                        <input  type="radio" id="aberto" name="openOrClosed" value="aberto" checked></input>
+                        <label className="abertoFechado" for="aberto">Aberto</label>
+                        
+                        <input type="radio" id="fechado" name="openOrClosed" value="fechado"></input>
+                        <label className="abertoFechado" for="fechado">Fechado</label>
+                    </div>
 
-                <div className="frete">
-                    <label className="frete" > <input type="radio" name="delivery_fee" checked></input> Entrega grátis </label>
-                    <label className="frete" > <input type="radio" name="delivery_fast"></input> Entrega rápida </label>
-                </div>                   
-            </ul>
+                    <div className="frete">
+                        <input type="radio" id="frete-gratis" name="frete" value="frete-gratis" checked></input>
+                        <label  className="frete" for="fete-gratis">Entrega grátis</label>
+                        
+                        <input type="radio" id="entrega-rapida" name="frete" value="entrega-rapida"></input>
+                        <label  className="frete" for="entrega-rapida">Entrega rápida</label>
+                    </div>
+                </div>
+                
+            </form>
         )
     }
 }
