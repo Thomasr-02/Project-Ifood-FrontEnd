@@ -21,7 +21,6 @@ export class Login extends Component {
       login = async (e) => {
         e.preventDefault();
         const { email, password } = this.state;
-        console.log(email, password)
 
         if (!email || !password) {
             this.setState({ error: "Preencha e-mail e senha para continuar!" });
@@ -41,9 +40,8 @@ export class Login extends Component {
                   this.props.history.push("/homeRestaurante");
   
               }
-  
             }catch (err) {
-              this.setState({ error: "Algo de errado nao esta certo" });
+              this.setState({ error: "Email ou senha não confere." });
             }
           }
       }
@@ -56,7 +54,10 @@ export class Login extends Component {
                         Login
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        {this.state.err}
+                      <div className="container-error">
+                        <span>{this.state.error}</span>
+                      </div>
+                        
                         <form className="formLogin" >
                             <h2>Login</h2>
                             <input className="formLogin" id="email" onChange={this.handle} placeholder="examplo@hotmail.com" type="email"></input>

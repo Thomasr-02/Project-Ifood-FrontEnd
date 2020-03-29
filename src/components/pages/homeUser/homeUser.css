@@ -6,6 +6,7 @@ body,html {
 
 .HomeUser {
     background-color: white;
+    height: 1000px;
 }
 .naveHomeUser {
     position: relative;

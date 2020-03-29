@@ -78,7 +78,7 @@ export class Cadastro extends Component {
                             <br></br>
                             <h4>Endereço</h4>
 
-                            <label>Cnameade</label>
+                            <label>Cidade</label>
                             <input name="city" className="form-control" onChange={ this.handle } placeholder="Ex: Joao Pessoa"></input>
                             
                             <label>Municipio</label>
