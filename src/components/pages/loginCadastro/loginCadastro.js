@@ -10,7 +10,7 @@ class CadastroLogin extends Component {
             <div className="loginCadastro">
                 <div className="buttonAndLogin">
                     <Login/>
-                    <button id="id-button-cadastro"><a href="#cadastroForm">Cadastrar</a></button>
+                    <a href="#cadastroForm"><button id="id-button-cadastro">Cadastrar</button></a>
                 </div>
                 
                 <div className="espaco">

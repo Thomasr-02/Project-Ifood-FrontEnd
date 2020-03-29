@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { logout, isId_estab, TOKEN_KEY2 } from '../../../services/auth.js'
+import { isId_estab, TOKEN_KEY2 } from '../../../services/auth.js'
 import api from '../../../services/api'
 import "./homeRestaurante.css"
 import { Form, Button } from 'react-bootstrap';

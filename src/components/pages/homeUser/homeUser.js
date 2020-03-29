@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './homeUser.css';
 import api from '../../../services/api'
-import { logout } from '../../../services/auth.js'
 import  NaveHomeUser from './components/naveHomeUser'
 
 export default class Home extends Component {
