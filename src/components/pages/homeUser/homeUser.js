@@ -9,11 +9,6 @@ export default class Home extends Component {
         restaurantes: [],
         search: ''
     }
-    
-    Logout() {
-        logout();
-        
-    }
 
     componentDidMount () {
         api.get('/findProductOrRestaurante/'+ this.state.search)

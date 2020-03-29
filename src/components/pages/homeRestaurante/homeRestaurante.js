@@ -21,10 +21,7 @@ export default class HomeRestaurante extends Component {
         err: ''
     }
 
-    Logout() {
-        logout();
-        
-    }
+    
 
     componentDidMount () {
         api.get('/dishOfRestaurantes/' + isId_estab(TOKEN_KEY2))

@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-
+import { logout } from '../../../../services/auth'
 export class NaveHomeUser extends Component {
+    Logout() {
+        logout ();
+        
+    }
+
     render() {
         return (
             <div className="naveHomeUser">

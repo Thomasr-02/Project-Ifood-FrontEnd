@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { logout } from '../../../../services/auth'
 
 export default class NaveHomeRestaurante extends Component {
+
+    Logout() {
+        logout();
+        
+    }
+
     render() {
         return (
             <div className="naveHomeRestaurante">
