@@ -50,6 +50,7 @@ export default class Home extends Component {
   render () {
     return (
       <div className="HomeUser">
+          <h1>Home cliente</h1>
           <div className="naveHomeUser">
                 <div className="container-search">
                     <input className='search' id="Search" onChange={this.handleChange} type="search" placeholder="Pesquisa restaurante/prato"></input>

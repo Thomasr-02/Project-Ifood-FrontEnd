@@ -71,6 +71,7 @@ export default class HomeRestaurante extends Component {
     render() {
         return (
             <div className="homeRestaurante">
+                <h1>Home restaurante</h1>
                 <NaveHomeRestaurante />
 
                 <Situacao/>

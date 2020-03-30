@@ -12,12 +12,12 @@ export class Cadastro extends Component {
         city: '',
         neighborhood:'',
         street:'',
-        number:'',
+        number: 0,
         
         name_estab: '', 
-        delivery_free: true, 
+        delivery_fee: true, 
         category: '', 
-        balance:'',
+        balance: 0.0,
 
         error: ''
     }
@@ -27,27 +27,35 @@ export class Cadastro extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    addUser = (e) => {
+    addUser = () => {
         const { firstName, lastName, email, password, city, neighborhood, street, number } = this.state
+        if (!email || !password) {
+            this.setState({ error: "Falha ao cadastrar" })
+        }else{
+            api.post("/users",  { firstName, lastName, email, password, city, neighborhood, street, number } )
+            .then(() => { alert("Cadasrado com sucesso como cliente!") })
+            .catch((err) => {
+                this.setState({ error: err.toString() })
+                
+            })
+        }
 
-        api.post("/users",  { firstName, lastName, email, password, city, neighborhood, street, number } )
-        .then(() => { alert("Cadasrado com sucesso como cliente!") })
-        .catch((err) => {
-            this.setState({ error: err.toString() })
-            
-        })
+        
 
     }
 
-    addRestaurante = (e) => {
+    addRestaurante = () => {
+        const { name_estab, email, password, city, neighborhood, street, number, delivery_fee, category, balance } = this.state
+        if (!email || !password) {
+            this.setState({ error: "Falha ao cadastrar" })
+        }else {
+            api.post("/restaurantes", { city, neighborhood, street, number, name_estab, email, password, delivery_fee, category, balance  })
+            .then(() => { alert("Sucesso ao cadastrar como restaurante!" ) })
+            .catch(err => {
+                this.setState({ error: err.toString() })
+            })
+        }
         
-        const { name_estab, email, password, city, neighborhood, street, number, delivery_free, category, balance } = this.state
-        
-        api.post("/restaurantes", { name_estab, email, password, city, neighborhood, street, number, delivery_free, category, balance })
-        .then(() => { alert("Sucesso ao cadastrar como restaurante!" ) })
-        .catch(err => {
-            this.setState({ error: err.toString() })
-        })
     }
 
     render() {
@@ -90,9 +98,11 @@ export class Cadastro extends Component {
                             <label>Número</label>
                             <input name="number" className="form-control" onChange={ this.handle } placeholder="55"></input>
                             
-                            <button className="button-cadastro">Cadastrar</button>
+                            <button className="button-cadastro" type="submit" >Cadastrar</button>        
                         </div>
+                        
                     </form>
+                    
     
                     <form className="cadastroForm" onSubmit={this.addRestaurante}>
                         <div className="gridInput">                            
@@ -122,10 +132,12 @@ export class Cadastro extends Component {
                                 <label>Número</label>
                                 <input name="number" className="form-control" onChange={ this.handle } placeholder="55"></input>
 
-                                <button className="button-cadastro" type="submit">Cadastrar</button>
                             </div>
+                            <button className="button-cadastro" type="submit" >Cadastrar</button>
                         </div>
+                        
                     </form>
+                    
                 </div>
             </div>
         )
