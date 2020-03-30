@@ -1,12 +1,13 @@
-html,body  {  	
-    background-repeat: no-repeat;
-    background-size: contain;
+html, body  {  	
     height: 100%; 
     width: 100%;
+}
+.loginCadastro {
     background-image: url("../../../assets/back-image.jpg");
-    background-position: center;
+    background-position: top;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-color: rgb(224, 44, 44);
-    
 }
 .buttonAndLogin {
     position: absolute;
