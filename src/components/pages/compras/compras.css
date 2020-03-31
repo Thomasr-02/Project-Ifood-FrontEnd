@@ -1,6 +1,5 @@
 .Compras{
-    /* border: 2px solid grey;
-    text-align: center; */
+    margin: 20px;
 
 }
 
@@ -12,6 +11,7 @@
 
 .cardapio { 
     margin: 20px;
+    text-align: left;
 }
 
 .card-dish {
@@ -19,9 +19,45 @@
     border: 2px solid grey; 
     width: 70%;
     text-align: center;
+    /* margin: 20px; */
+}
+.card-carrinho{
+    text-align: center;
     margin: 20px;
+    margin-left: 50px;
+    padding: 20px;
+    width: 50%;
+    max-height: 320px;
+    border: 2px solid grey; 
+    border-radius: 30px;
 }
 
 .carrinho {
-    margin: 20px;
+    display: grid;
+    grid-template-columns: auto auto;
+    border: 2px solid rgb(221, 81, 81); 
+    min-height: 500px;
+    width: 100%;
+    border-radius: 50px;
+    
+}
+.header-carrinho{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 2px;
+    width: 50%;
+    height: 40%;
+    text-align: left;
+}
+
+.cardapio { grid-area: menu; }
+.header-carrinho { grid-area: main; }
+.carrinho { grid-area: footer; }
+.grid-areas {
+    margin-top: 20px;
+    text-align: center;
+    display: grid;
+    grid-template-areas: 
+        'menu main main'
+        'menu footer footer';
 }

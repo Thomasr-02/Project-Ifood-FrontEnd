@@ -18,7 +18,8 @@ export default class Compras extends Component  {
 
         name: '',
         preco: '',
-        len: 0
+        total: 0,
+
     } 
 
     
@@ -44,14 +45,23 @@ export default class Compras extends Component  {
 
     addCarrinho =  (dish) => {
         const carrinho = this.state.carrinho.concat(dish) 
+        const total = this.state.total + dish.value_dish
+        
         this.setState({ carrinho })
+        this.setState({ total })
     }
 
-    removeCarrinho = (index) => {
+    removeCarrinho = (index, carrin) => {
         const carrinho = this.state.carrinho
-        carrinho.splice(index, 1)
+        const total = this.state.total - carrin.value_dish
+
+        
+        carrinho.splice(index, 1) //remove o 1 elemento desse index
+    
         this.setState({ carrinho })
+        this.setState({   total  })
     }
+
 
     
     render() {
@@ -64,7 +74,7 @@ export default class Compras extends Component  {
                     <p>Email: {this.state.email}</p>
                 </div>
                 
-                <div className="grid-container">
+                <div className="grid-areas">
                     <div className="cardapio">
                         <h3 >Cardápio</h3>
                         {
@@ -72,26 +82,34 @@ export default class Compras extends Component  {
                                 
                                 <div className="card-dish" key={index}>
                                     <p>Prato {index + 1}</p>
-                                    <p>Nome do prato: {dishes.name_dish}</p>
+                                    <p>Nome do prato: <b>{dishes.name_dish}</b></p>
                                     <p>Descrição: {dishes.description_dish}</p> 
                                     <p>Preço { dishes.value_dish }R$</p>
-                                    <button name={ dishes.name_dish } onClick={ () => this.addCarrinho(dishes) } >Adicionar ao carrinho</button>
+                                    <button onClick={ () => this.addCarrinho(dishes) } >Adicionar ao carrinho</button>
                                 </div>
                             ))
                         }
                     </div>
+                    
+                    <div className="header-carrinho">
+                        <div>
+                            <h3> Seu carrinho: R$ { this.state.total } </h3>  
+                        </div>
+                        <div>
+                            <button>Finalizar</button>
+                        </div>
+                    </div>
 
                     <div className="carrinho">
-                        <h3> Seu carrinho</h3>
-                        <button>Finalizar</button>
                         {
                             this.state.carrinho.map((carrinho, index) => (
-                                <div className="card-dish" key={index}>
+                                <div className="card-carrinho" key={index}>
+                                    
                                     <p>Prato {index + 1 }</p>
-                                    <p>Nome do prato: {carrinho.name_dish}</p>
+                                    <p>Nome do prato: <b>{carrinho.name_dish}</b></p>
                                     <p>Descrição: {carrinho.description_dish}</p> 
                                     <p>Preço { carrinho.value_dish }R$</p>
-                                    <button onClick={() => this.removeCarrinho( index ) }>Remover</button>
+                                    <button onClick={() => this.removeCarrinho( index, carrinho ) }>Remover</button>
                                 </div>
                             ))
                         }
