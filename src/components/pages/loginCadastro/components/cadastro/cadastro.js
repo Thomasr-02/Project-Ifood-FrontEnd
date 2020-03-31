@@ -15,7 +15,7 @@ export class Cadastro extends Component {
         number: 0,
         
         name_estab: '', 
-        delivery_fee: true, 
+        delivery_fee: false, 
         category: '', 
         balance: 0.0,
 

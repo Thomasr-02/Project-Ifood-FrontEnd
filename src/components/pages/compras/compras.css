@@ -1,4 +1,27 @@
 .Compras{
-    height: 1000px;
+    /* border: 2px solid grey;
+    text-align: center; */
 
+}
+
+
+.info-restaurante {
+    border: 2px solid grey;
+    text-align: center;
+}
+
+.cardapio { 
+    margin: 20px;
+}
+
+.card-dish {
+    padding: 20px;
+    border: 2px solid grey; 
+    width: 70%;
+    text-align: center;
+    margin: 20px;
+}
+
+.carrinho {
+    margin: 20px;
 }

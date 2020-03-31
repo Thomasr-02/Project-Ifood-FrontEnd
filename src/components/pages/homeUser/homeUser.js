@@ -3,13 +3,14 @@ import './homeUser.css';
 import api from '../../../services/api'
 import { Link } from 'react-router-dom'
 import { logout } from '../../../services/auth'
-import Compras from '../compras/compras'
+import intermediador from '../compras/intermediador'
 
 export default class Home extends Component {
+
     state = {
         restaurantes: [],
         search: '',
-        id_establishment: ''
+        id_establishment: 0
     }
 
     Logout() {
@@ -29,7 +30,6 @@ export default class Home extends Component {
     }
     
     handle = async e => {
-        console.log(e.target.name, e.target.value)
         await this.setState({[ e.target.name] : e.target.value})
     }
 
@@ -47,6 +47,11 @@ export default class Home extends Component {
         });
     }
     
+    sendIdCompras = (e) => {
+
+        intermediador.idRest(e.target.value, "set")
+    }
+
   render () {
     return (
       <div className="HomeUser">
@@ -89,7 +94,10 @@ export default class Home extends Component {
                             <p>Cidade: {restaurantes.city}</p>
                             {restaurantes.delivery_free ? (<p>Frete grátis!</p>) : (<p>Preço do frete: R$ 2,00</p>)}
                             <p></p>
-                            <button name="id_establishment" type="submit" onClick={ this.handle } value={ restaurantes.id_establishment } className="btn btn-primary" >  Ver mais </button>
+                            <Link to = "/homeUser/compras">
+                                <button name="id_establishment" type="submit" onClick={ this.sendIdCompras } value={ restaurantes.id_establishment } className="btn btn-primary" >  Ver mais </button>
+                            </Link>
+                            
                             
                         </div>
                     </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
@@ -101,7 +109,7 @@ export default class Home extends Component {
             
           </div>
           
-          <Compras id="Compras" id_establishment={this.state.id_establishment}/>
+          {/* <Compras id_establishment={ this.state.id_establishment }/> */}
       </div>
     );
   }
