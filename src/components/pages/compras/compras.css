@@ -61,3 +61,19 @@
         'menu main main'
         'menu footer footer';
 }
+
+.modal-informacoes {
+    min-height: 500px;
+    padding: 100px;
+
+}
+
+.form-info-endereco {
+    text-align: left;
+    display: grid;
+    grid-template-columns: auto;
+}
+
+.form-info-endereco {
+    padding: 10px;
+}

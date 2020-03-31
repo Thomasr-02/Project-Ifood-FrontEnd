@@ -5,6 +5,7 @@ import { login, TOKEN_KEY2 } from "../../../../../services/auth";
 
 import './login.css'
 import api from '../../../../../services/api'
+import intermediador from '../../../compras/intermediador'
 
 
 export class Login extends Component {
@@ -30,6 +31,7 @@ export class Login extends Component {
   
               if (response.data[0].id_person !== undefined) {
                   login(response.data.token);
+                  intermediador.idUser(response.data[0].id_person, "set")
                   localStorage.setItem(TOKEN_KEY2, response.data[0].id_establishment);
                   this.props.history.push("/homeUser");
                   

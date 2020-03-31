@@ -50,6 +50,7 @@ export default class Home extends Component {
     sendIdCompras = (e) => {
 
         intermediador.idRest(e.target.value, "set")
+        intermediador.idUser()
     }
 
   render () {

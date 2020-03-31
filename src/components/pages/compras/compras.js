@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Modal from 'react-awesome-modal';
 import api from '../../../services/api'
 import intermediador from './intermediador'
 import './compras.css'
@@ -11,7 +12,8 @@ export default class Compras extends Component  {
         name_estab: '',
         delivery_fee: false,
         email: '',
-        id: intermediador.idRest(0, "get"),
+        id_restaurante: intermediador.idRest(0, "get"),
+        id_person: intermediador.idUser(0, "get"),
 
         dishes: [],
         carrinho: [],
@@ -19,12 +21,15 @@ export default class Compras extends Component  {
         name: '',
         preco: '',
         total: 0,
+        visible: false,
+
+        person: []
 
     } 
 
     
     componentDidMount = () => {
-        api.get('/restaurantes/'+ this.state.id)
+        api.get('/restaurantes/'+ this.state.id_restaurante)
         .then(res => {
             const {name_estab, delivery_fee, email} = res.data[0]    
             this.setState({ name_estab }) 
@@ -35,7 +40,7 @@ export default class Compras extends Component  {
             console.log("Erro ao encontrar restaurante")
         })
         
-        api.get('/dishOfRestaurantes/'+ this.state.id)
+        api.get('/dishOfRestaurantes/'+ this.state.id_restaurante)
         .then((res)=>{
             const dishes = res.data
             this.setState({ dishes })
@@ -62,6 +67,21 @@ export default class Compras extends Component  {
         this.setState({   total  })
     }
 
+    mostraModal = () => {
+        this.setState({ visible: true })
+        api.get("/users/" + this.state.id_person).then((res) => {
+            const person = res.data
+
+            console.log(person)
+
+            this.setState({ person })
+
+        })
+    }
+
+    fechaModal = () => {
+        this.setState({ visible: false })
+    }
 
     
     render() {
@@ -96,9 +116,43 @@ export default class Compras extends Component  {
                             <h3> Seu carrinho: R$ { this.state.total } </h3>  
                         </div>
                         <div>
-                            <button>Finalizar</button>
+                            <button onClick={ this.mostraModal } >Finalizar</button>
                         </div>
                     </div>
+
+                        <Modal visible={ this.state.visible }  effect="fadeInUp" onClickAway={ this.fechaModal }>
+                            
+                            <div className="modal-informacoes">
+                                <h2>Confirme suas informações</h2>
+                                <h3> Total a pagar: { this.state.total } </h3>
+                                {
+                                    this.state.person.map(person =>(
+                                        <div className="container-info-endereco">
+                                            <form className="form-info-endereco">
+                                                <b>Rua</b>
+                                                <input className="form-info-endereco" value={person.street} ></input>
+
+                                                <b>Bairro</b>
+                                                <input className="form-info-endereco" value={person.neighborhood} ></input>
+                                        
+                                                <b>Cidade</b>
+                                                <input className="form-info-endereco" value={person.city} ></input>
+                                                
+                                                <b>Número</b>
+                                                <input className="form-info-endereco" value={person.number} ></input>
+
+                                                <div>
+                                                    
+                                                </div>
+
+                                            </form>
+                                            <button type="submit"> Finzalizar compra </button>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                            
+                        </Modal>
 
                     <div className="carrinho">
                         {
