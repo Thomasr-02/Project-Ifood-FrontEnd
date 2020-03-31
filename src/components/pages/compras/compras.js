@@ -3,6 +3,7 @@ import Modal from 'react-awesome-modal';
 import api from '../../../services/api'
 import intermediador from './intermediador'
 import './compras.css'
+// import star0 from '../../../assets/'
 
 export default class Compras extends Component  {
 
@@ -20,10 +21,11 @@ export default class Compras extends Component  {
 
         name: '',
         preco: '',
-        total: 0,
+        total: 0.0,
         visible: false,
 
-        person: []
+        person: [],
+        rate: 0,
 
     } 
 
@@ -83,6 +85,96 @@ export default class Compras extends Component  {
         this.setState({ visible: false })
     }
 
+    changeStar = (e) => {
+        var rate = 0
+        var estrela = e.target.id
+
+        var src_ligada = require("../../../assets/star1.png")
+        var src_desligada = require("../../../assets/star0.png")
+
+        var s1 = document.getElementById("s1").src //pega o endereço da imagem de cada estrela
+        var s2 = document.getElementById("s2").src
+        var s3 = document.getElementById("s3").src
+        var s4 = document.getElementById("s4").src
+        var s5 = document.getElementById("s5").src
+
+        if (estrela == 's1'){ //se clicar na estrela 1, liga ela
+            document.getElementById("s1").src = require("../../../assets/star1.png");
+            if (s5 === src_ligada || s4 === src_ligada || s3 === src_ligada || s2 ===src_ligada){ //se s5 tiver ligada, desliga todas, menos s1
+                document.getElementById("s2").src = require("../../../assets/star0.png");
+                document.getElementById("s3").src = require("../../../assets/star0.png");
+                document.getElementById("s4").src = require("../../../assets/star0.png");
+                document.getElementById("s5").src = require("../../../assets/star0.png");
+            }
+            else{
+                document.getElementById("s1").src = require("../../../assets/star1.png");
+            }
+            
+            rate = 1;
+
+        }
+        if (estrela == 's2'){ 
+            document.getElementById("s1").src = require("../../../assets/star1.png");
+            document.getElementById("s2").src = require("../../../assets/star1.png");
+            
+            if (s5 === src_ligada || s4 === src_ligada || s3 === src_ligada){
+                document.getElementById("s3").src = require("../../../assets/star0.png");
+                document.getElementById("s4").src = require("../../../assets/star0.png");
+                document.getElementById("s5").src = require("../../../assets/star0.png");
+            }
+            else{
+                document.getElementById("s2").src = require("../../../assets/star1.png");
+            }
+            rate = 2;
+
+
+
+        }
+        if (estrela == 's3'){ 
+            document.getElementById("s1").src = require("../../../assets/star1.png");
+            document.getElementById("s2").src = require("../../../assets/star1.png");
+            document.getElementById("s3").src = require("../../../assets/star1.png");
+            
+            if (s5 === src_ligada || s4 === src_ligada){
+                document.getElementById("s4").src = require("../../../assets/star0.png");
+                document.getElementById("s5").src = require("../../../assets/star0.png");
+            }
+            else{
+                document.getElementById("s3").src = require("../../../assets/star1.png");
+            }
+            rate = 3;
+
+        }
+        if (estrela == 's4'){ 
+            document.getElementById("s1").src = require("../../../assets/star1.png");
+            document.getElementById("s2").src = require("../../../assets/star1.png");
+            document.getElementById("s3").src = require("../../../assets/star1.png");
+            document.getElementById("s4").src = require("../../../assets/star1.png");
+
+            if (s5 === src_ligada){
+                document.getElementById("s5").src = require("../../../assets/star0.png");
+            }
+            else{
+                document.getElementById("s4").src = require("../../../assets/star1.png");
+            }
+            
+            rate = 4;
+
+        }
+        if (estrela == 's5'){ 
+            document.getElementById("s1").src = require("../../../assets/star1.png");
+            document.getElementById("s2").src = require("../../../assets/star1.png");
+            document.getElementById("s3").src = require("../../../assets/star1.png");
+            document.getElementById("s4").src = require("../../../assets/star1.png");
+            document.getElementById("s5").src = require("../../../assets/star1.png");
+            rate = 5;
+
+        }
+
+        this.setState({ rate })
+            
+           
+    }
     
     render() {
 
@@ -124,7 +216,7 @@ export default class Compras extends Component  {
                             
                             <div className="modal-informacoes">
                                 <h2>Confirme suas informações</h2>
-                                <h3> Total a pagar: { this.state.total } </h3>
+                                <h3> Total a pagar: R$ { this.state.total } </h3>
                                 {
                                     this.state.person.map(person =>(
                                         <div className="container-info-endereco">
@@ -141,8 +233,16 @@ export default class Compras extends Component  {
                                                 <b>Número</b>
                                                 <input className="form-info-endereco" value={person.number} ></input>
 
-                                                <div>
-                                                    
+                                                <div className="rate">
+                                                    <b>Que tal dar uma nota ao prato? =^-^=</b>
+                                                    <div className="stars">
+                                                        <a href="javascript:void(0)" onClick={ this.changeStar }><img id="s1" src={require("../../../assets/star0.png")} alt="star1"></img></a>
+                                                        <a href="javascript:void(0)" onClick={ this.changeStar }><img id="s2" src={require("../../../assets/star0.png")} alt="star2"></img></a>
+                                                        <a href="javascript:void(0)" onClick={ this.changeStar }><img id="s3" src={require("../../../assets/star0.png")} alt="star3"></img></a>
+                                                        <a href="javascript:void(0)" onClick={ this.changeStar }><img id="s4" src={require("../../../assets/star0.png")} alt="star4"></img></a>
+                                                        <a href="javascript:void(0)" onClick={ this.changeStar }><img id="s5" src={require("../../../assets/star0.png")} alt="star5"></img></a>
+                                                        <b>{ this.state.rate }</b>
+                                                    </div>
                                                 </div>
 
                                             </form>
