@@ -69,7 +69,7 @@ export default class HomeRestaurante extends Component {
     render() {
         return (
             <div className="homeRestaurante">
-                <h1>Home restaurante</h1>
+                <h1 className="home-tittle">Home restaurante</h1>
                 <NaveHomeRestaurante id={ this.state.fk_establishment_id_establishment } />
 
                 <Situacao id={ this.state.fk_establishment_id_establishment }/>

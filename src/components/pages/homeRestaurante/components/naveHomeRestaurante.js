@@ -121,13 +121,11 @@ export default class NaveHomeRestaurante extends Component {
                             }
                     </div>
                 </Modal>
-
+                                
                 <Modal className="modal-relatorio" visible={ this.state.visible_relatorio3 } effect="fadeInUp" onClickAway={ this.fechaModal} >
                     <div className="pratos-mais-comprados">
 
                         <h4>Relatório do valor médio dos sete dias anteriores de cada prato</h4>
-                        <label className="label-relatorio"> Digite o dia </label>
-                        <input onChange={ this.getRelatorioTwo }></input>
                             {
                                 this.state.dishes.map((dish, index) => (
                                     <div key={ index } className="media-pratos">   

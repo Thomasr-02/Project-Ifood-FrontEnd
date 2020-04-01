@@ -40,6 +40,7 @@ export default class Home extends Component {
         api.get('/findProductOrRestaurante/' + this.state.search)
             .then(res => {
                 const restaurantes = res.data;
+                console.log(restaurantes)
                 this.setState( { restaurantes } );
             
             }).catch((err) => {
@@ -56,7 +57,7 @@ export default class Home extends Component {
   render () {
     return (
       <div className="HomeUser">
-          <h1>Home cliente</h1>
+          <h1 className="home-tittle">Home cliente</h1>
           <div className="naveHomeUser">
                 <div className="container-search">
                     <input className='search' id="Search" onChange={this.handleChange} type="search" placeholder="Pesquisa restaurante/prato"></input>
@@ -91,9 +92,9 @@ export default class Home extends Component {
                     <div key={restaurantes.id_establishment} className = "container-cards-restaurantes">
                         
                         <div className="cards">
-                            <h5>Restaurante: {restaurantes.name_estab}</h5>
+                            <h5> <b>{restaurantes.name_estab}</b></h5>
                             <p>Cidade: {restaurantes.city}</p>
-                            {restaurantes.delivery_free ? (<p>Frete grátis!</p>) : (<p>Preço do frete: R$ 2,00</p>)}
+                            {restaurantes.delivery_fee ? (<p>Frete grátis!</p>) : (<p>Preço do frete: R$ 2,00</p>)}
                             <p></p>
                             <Link to = "/homeUser/compras">
                                 <button name="id_establishment" type="submit" onClick={ this.sendIdCompras } value={ restaurantes.id_establishment } className="btn btn-primary" >  Ver mais </button>

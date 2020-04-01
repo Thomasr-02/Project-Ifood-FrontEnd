@@ -8,6 +8,10 @@ body,html {
     background-color: white;
     height: 100%;
 }
+
+.home-tittle {
+    text-align: center;
+}
 .naveHomeUser {
     position: relative;
 }
