@@ -85,7 +85,16 @@
     padding: 20px;
     margin-top: 50px;
 }
-
+.button-star {
+    background-color: transparent;
+    border: 0;
+    color: #00f;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0;
+    position: relative;
+    text-decoration: underline;
+}
 
 .stars {
     margin-top: 20px;

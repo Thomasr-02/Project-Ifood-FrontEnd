@@ -87,7 +87,7 @@ export default class Home extends Component {
                 <h3>Restaurantes</h3>
                 <br></br>
                 { 
-                    this.state.restaurantes.map (restaurantes => (
+                    this.state.restaurantes.reverse().map (restaurantes => (
                     <div key={restaurantes.id_establishment} className = "container-cards-restaurantes">
                         
                         <div className="cards">

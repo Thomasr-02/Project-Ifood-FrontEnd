@@ -3,12 +3,8 @@ import Modal from 'react-awesome-modal';
 import api from '../../../services/api'
 import intermediador from './intermediador'
 import './compras.css'
-// import star0 from '../../../assets/'
 
 export default class Compras extends Component  {
-
-    //dishOfRestaurantes
-    //pegar 1 restaurantes/id
     state = {
         name_estab: '',
         delivery_fee: false,
@@ -21,11 +17,12 @@ export default class Compras extends Component  {
 
         name: '',
         preco: '',
-        total: 0.0,
+        value: 0.0,
         visible: false,
 
         person: [],
-        rate: 0,
+        rating: 0,
+        id_dish: 0,
 
     } 
 
@@ -52,30 +49,26 @@ export default class Compras extends Component  {
 
     addCarrinho =  (dish) => {
         const carrinho = this.state.carrinho.concat(dish) 
-        const total = this.state.total + dish.value_dish
+        const value = this.state.value + dish.value_dish
         
         this.setState({ carrinho })
-        this.setState({ total })
+        this.setState({ value })
     }
 
     removeCarrinho = (index, carrin) => {
         const carrinho = this.state.carrinho
-        const total = this.state.total - carrin.value_dish
+        const value = this.state.value - carrin.value_dish
 
-        
         carrinho.splice(index, 1) //remove o 1 elemento desse index
     
         this.setState({ carrinho })
-        this.setState({   total  })
+        this.setState({   value  })
     }
 
     mostraModal = () => {
         this.setState({ visible: true })
         api.get("/users/" + this.state.id_person).then((res) => {
             const person = res.data
-
-            console.log(person)
-
             this.setState({ person })
 
         })
@@ -86,19 +79,18 @@ export default class Compras extends Component  {
     }
 
     changeStar = (e) => {
-        var rate = 0
+        e.preventDefault()
+        var  rating   = 0
         var estrela = e.target.id
 
         var src_ligada = require("../../../assets/star1.png")
-        var src_desligada = require("../../../assets/star0.png")
 
-        var s1 = document.getElementById("s1").src //pega o endereço da imagem de cada estrela
-        var s2 = document.getElementById("s2").src
+        var s2 = document.getElementById("s2").src //pega o endereço da imagem de cada estrela
         var s3 = document.getElementById("s3").src
         var s4 = document.getElementById("s4").src
         var s5 = document.getElementById("s5").src
 
-        if (estrela == 's1'){ //se clicar na estrela 1, liga ela
+        if (estrela === 's1'){ //se clicar na estrela 1, liga ela
             document.getElementById("s1").src = require("../../../assets/star1.png");
             if (s5 === src_ligada || s4 === src_ligada || s3 === src_ligada || s2 ===src_ligada){ //se s5 tiver ligada, desliga todas, menos s1
                 document.getElementById("s2").src = require("../../../assets/star0.png");
@@ -110,10 +102,10 @@ export default class Compras extends Component  {
                 document.getElementById("s1").src = require("../../../assets/star1.png");
             }
             
-            rate = 1;
+            rating = 1;
 
         }
-        if (estrela == 's2'){ 
+        if (estrela === 's2'){ 
             document.getElementById("s1").src = require("../../../assets/star1.png");
             document.getElementById("s2").src = require("../../../assets/star1.png");
             
@@ -125,12 +117,12 @@ export default class Compras extends Component  {
             else{
                 document.getElementById("s2").src = require("../../../assets/star1.png");
             }
-            rate = 2;
+            rating = 2;
 
 
 
         }
-        if (estrela == 's3'){ 
+        if (estrela === 's3'){ 
             document.getElementById("s1").src = require("../../../assets/star1.png");
             document.getElementById("s2").src = require("../../../assets/star1.png");
             document.getElementById("s3").src = require("../../../assets/star1.png");
@@ -142,10 +134,10 @@ export default class Compras extends Component  {
             else{
                 document.getElementById("s3").src = require("../../../assets/star1.png");
             }
-            rate = 3;
+            rating = 3;
 
         }
-        if (estrela == 's4'){ 
+        if (estrela === 's4'){ 
             document.getElementById("s1").src = require("../../../assets/star1.png");
             document.getElementById("s2").src = require("../../../assets/star1.png");
             document.getElementById("s3").src = require("../../../assets/star1.png");
@@ -158,31 +150,78 @@ export default class Compras extends Component  {
                 document.getElementById("s4").src = require("../../../assets/star1.png");
             }
             
-            rate = 4;
+            rating = 4;
 
         }
-        if (estrela == 's5'){ 
+        if (estrela === 's5'){ 
             document.getElementById("s1").src = require("../../../assets/star1.png");
             document.getElementById("s2").src = require("../../../assets/star1.png");
             document.getElementById("s3").src = require("../../../assets/star1.png");
             document.getElementById("s4").src = require("../../../assets/star1.png");
             document.getElementById("s5").src = require("../../../assets/star1.png");
-            rate = 5;
+            rating = 5;
 
         }
+        this.setState({ rating })
 
-        this.setState({ rate })
-            
+    }
+
+    addCompra = () => {
+        var { rating, value } = this.state
+        var id_dishs = []
+        console.log(value)
+        var id_establishment = this.state.carrinho[0].id_establishment
+        
+        this.state.carrinho.map(dish =>(  //fazendo array pra pegar os ids
+           id_dishs = id_dishs.concat(dish.id_dish)
            
+        )) 
+
+        api.get('/restaurantes/'+ id_establishment).then(res => {
+            var frete = res.data[0].delivery_fee
+            console.log(frete)
+            if (frete === false) {
+                value = value - 2
+            }
+        })
+        console.log(value)
+        
+        api.post("/buys/", { rating, value }).then((response => {
+            const id_buy = response.data[0].id_buy
+            console.log(id_buy)
+
+
+            var   data   = new Date(); 
+            var   ano    = data.getFullYear(); 
+            var   mes    = data.getMonth();
+            var   dia    = data.getDate();
+            var   hora   = data.getHours();
+            var   min    = data.getMinutes();
+            var   seg    = data.getSeconds();
+
+            var date = ano + '-' + (mes + 1) + '-' + dia + ' ' + hora + ':' + min + ':' + seg //formatando data "YYY/-MM--DD Hora:Minutos:Segundos"
+
+            for (var i=0; i < id_dishs.length; i++) {
+                var id_dish = id_dishs[i] //pegando os ids de cada prato no carrinho
+
+                api.post("/buys/"+id_buy+"/dishes", { id_dish, date }).then(response =>{
+                }).catch((err) =>{
+                })
+            }
+            alert("Compra efetuada!")
+            this.fechaModal()
+            this.props.history.push("/homeUser");
+        })).catch(err => {
+            alert(err)
+        })
     }
     
     render() {
-
         return (
             <div className="Compras">
                 <div className="info-restaurante">
                     <h2>{this.state.name_estab}</h2>    
-                    {this.statedelivery_fee ? (<p>Frete grátis!</p>) : (<p>Preço do frete: R$ 2,00</p>)}
+                    {this.state.delivery_fee ? (<p>Frete grátis!</p>) : (<p>Preço do frete: R$ 2,00</p>)}
                     <p>Email: {this.state.email}</p>
                 </div>
                 
@@ -191,7 +230,6 @@ export default class Compras extends Component  {
                         <h3 >Cardápio</h3>
                         {
                             this.state.dishes.map((dishes, index) => (
-                                
                                 <div className="card-dish" key={index}>
                                     <p>Prato {index + 1}</p>
                                     <p>Nome do prato: <b>{dishes.name_dish}</b></p>
@@ -205,7 +243,7 @@ export default class Compras extends Component  {
                     
                     <div className="header-carrinho">
                         <div>
-                            <h3> Seu carrinho: R$ { this.state.total } </h3>  
+                            <h3> Seu carrinho: R$ { this.state.value } </h3>  
                         </div>
                         <div>
                             <button onClick={ this.mostraModal } >Finalizar</button>
@@ -216,7 +254,7 @@ export default class Compras extends Component  {
                             
                             <div className="modal-informacoes">
                                 <h2>Confirme suas informações</h2>
-                                <h3> Total a pagar: R$ { this.state.total } </h3>
+                                <h3> Total a pagar: R$ { this.state.value } </h3>
                                 {
                                     this.state.person.map(person =>(
                                         <div className="container-info-endereco">
@@ -236,17 +274,17 @@ export default class Compras extends Component  {
                                                 <div className="rate">
                                                     <b>Que tal dar uma nota ao prato? =^-^=</b>
                                                     <div className="stars">
-                                                        <a href="javascript:void(0)" onClick={ this.changeStar }><img id="s1" src={require("../../../assets/star0.png")} alt="star1"></img></a>
-                                                        <a href="javascript:void(0)" onClick={ this.changeStar }><img id="s2" src={require("../../../assets/star0.png")} alt="star2"></img></a>
-                                                        <a href="javascript:void(0)" onClick={ this.changeStar }><img id="s3" src={require("../../../assets/star0.png")} alt="star3"></img></a>
-                                                        <a href="javascript:void(0)" onClick={ this.changeStar }><img id="s4" src={require("../../../assets/star0.png")} alt="star4"></img></a>
-                                                        <a href="javascript:void(0)" onClick={ this.changeStar }><img id="s5" src={require("../../../assets/star0.png")} alt="star5"></img></a>
-                                                        <b>{ this.state.rate }</b>
+                                                        <button className="button-star"><img id="s1"  onClick={ this.changeStar } src={require("../../../assets/star0.png")} alt="star1"></img></button>
+                                                        <button className="button-star"><img id="s2"  onClick={ this.changeStar } src={require("../../../assets/star0.png")} alt="star1"></img></button>
+                                                        <button className="button-star"><img id="s3"  onClick={ this.changeStar } src={require("../../../assets/star0.png")} alt="star1"></img></button>
+                                                        <button className="button-star"><img id="s4"  onClick={ this.changeStar } src={require("../../../assets/star0.png")} alt="star1"></img></button>
+                                                        <button className="button-star"><img id="s5"  onClick={ this.changeStar } src={require("../../../assets/star0.png")} alt="star1"></img></button>
+                                                        <b>{ this.state.rating }</b>
                                                     </div>
                                                 </div>
 
                                             </form>
-                                            <button type="submit"> Finzalizar compra </button>
+                                            <button onClick={ this.addCompra } > Finzalizar compra </button>
                                         </div>
                                     ))
                                 }
@@ -267,11 +305,8 @@ export default class Compras extends Component  {
                                 </div>
                             ))
                         }
-                        
                     </div>
                 </div>
-                
-                
             </div>
         )
     }

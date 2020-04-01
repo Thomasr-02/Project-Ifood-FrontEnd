@@ -17,11 +17,9 @@ export default class HomeRestaurante extends Component {
         type_dish: '',
         description_dish: '',
         value_dish: '',
-        fk_establishment_id_establishment: -1,
+        fk_establishment_id_establishment: 0,
         err: ''
     }
-
-    
 
     componentDidMount () {
         api.get('/dishOfRestaurantes/' + isId_estab(TOKEN_KEY2))
@@ -72,9 +70,9 @@ export default class HomeRestaurante extends Component {
         return (
             <div className="homeRestaurante">
                 <h1>Home restaurante</h1>
-                <NaveHomeRestaurante />
+                <NaveHomeRestaurante id={ this.state.fk_establishment_id_establishment } />
 
-                <Situacao/>
+                <Situacao id={ this.state.fk_establishment_id_establishment }/>
                 
                 <div className="grid-container">
                     <div className="addPrato">
