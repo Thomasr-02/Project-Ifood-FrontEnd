@@ -59,9 +59,23 @@ body,html {
     align-items: center;
 }
 
-.container-cards-restaurantes {
-    margin: 20px;
+.button-position {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto auto;
+    left: 25%;
+    width: 50%;
+    margin-bottom: 50px;
+}
+
+#button-pesquisa-prato {
+    margin-right: 50px;
+}
+
+.container-cards-cardapio {
     border: 1px solid grey;
+    border-radius: 10px;
+    margin-right: 100px;
+    padding: 20px;
     text-align: center;
-    
 }
