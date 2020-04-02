@@ -121,7 +121,8 @@ export default class Home extends Component {
 
                         <div className="cards">
                             <h5> <b>{restaurantes.name_estab}</b></h5>
-                            <p>Cidade: {restaurantes.city}</p>
+                            <p>Email: {restaurantes.email}</p>
+                            
                             {restaurantes.delivery_fee ? (<p>Frete grátis!</p>) : (<p>Preço do frete: R$ 2,00</p>)}
                             <p></p>
                             <Link to = "/homeUser/compras">
