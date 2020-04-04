@@ -67,8 +67,11 @@ export default class Compras extends Component  {
 
     mostraModal = () => {
         this.setState({ visible: true })
+        console.log(this.state.id_person)
+
         api.get("/users/" + this.state.id_person).then((res) => {
             const person = res.data
+            console.log(person)
             this.setState({ person })
 
         })
@@ -215,6 +218,10 @@ export default class Compras extends Component  {
             alert(err)
         })
     }
+
+    voltar = ()  => {
+        this.props.history.push('/homeUser/')
+    }
     
     render() {
         return (
@@ -224,6 +231,7 @@ export default class Compras extends Component  {
                     {this.state.delivery_fee ? (<p>Frete grátis!</p>) : (<p>Preço do frete: R$ 2,00</p>)}
                     <p>Email: {this.state.email}</p>
                 </div>
+                <button onClick={ this.voltar }>Voltar</button>
                 
                 <div className="grid-areas">
                     <div className="cardapio">

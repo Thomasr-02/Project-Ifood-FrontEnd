@@ -3,7 +3,7 @@ import './homeUser.css';
 import api from '../../../services/api'
 import { Link } from 'react-router-dom'
 import { logout } from '../../../services/auth'
-import intermediador from '../compras/intermediador'
+import CardRestaurante from './cardRestaurante'
 
 export default class Home extends Component {
 
@@ -34,11 +34,7 @@ export default class Home extends Component {
         await this.setState({[ e.target.name] : e.target.value})
     }
     
-    sendIdCompras = (e) => {
-
-        intermediador.idRest(e.target.value, "set")
-        // intermediador.idUser()
-    }
+    
 
     mostraPratos = () => {
         var name_dish = this.state.search
@@ -60,6 +56,34 @@ export default class Home extends Component {
         var name_estab = this.state.search
 
         api.get('/findRestaurante/' +  name_estab)
+        .then(res => {
+            const restaurantes = res.data;
+            console.log(restaurantes)
+            this.setState({ pratos: [] })
+            this.setState({ restaurantes })
+
+        }).catch(err => {
+            console.log(err)
+
+        })
+    }
+
+    mostPopular = () => {
+        api.get('/restaurantes/mostpopular/')
+        .then(res => {
+            const restaurantes = res.data;
+            console.log(restaurantes)
+            this.setState({ pratos: [] })
+            this.setState({ restaurantes })
+
+        }).catch(err => {
+            console.log(err)
+
+        })
+    }
+
+    promocoes = () => {
+        api.get('/restaurantes/bestcheap/'+ this.state.id_establishment)
         .then(res => {
             const restaurantes = res.data;
             console.log(restaurantes)
@@ -101,11 +125,11 @@ export default class Home extends Component {
                     
                     <ul className="ulCategorias">
                         <h5>Categorias</h5>
-                        <li><a href="teste">Mais pedidos</a></li>
-                        <li><a href="teste">Promoções</a></li>
-                        <li><a href="teste">Entrega grátis</a></li>
-                        <li><a href="teste">Restaurante popular</a></li>
-                        <li><a href="teste">Entrega rápida</a></li>
+                        <li><button className="button-star">Mais pedidos</button></li>
+                        <li><button onClick={ this.promocoes } className="button-star">Promoções</button></li>
+                        <li><button className="button-star">Entrega grátis</button></li>
+                        <li><button onClick={ this.mostPopular } className="button-star">Restaurante popular</button></li>
+                        <li><button  className="button-star">Entrega rápida</button></li>
                     </ul>
                     
                 </div>
@@ -115,21 +139,10 @@ export default class Home extends Component {
                 <h3>Pesquisa</h3>
                 <br></br>
                 { 
-                    this.state.restaurantes.reverse().map (restaurantes => (
+                    this.state.restaurantes.reverse().map (restaurantes => (    
                     <div key={restaurantes.id_establishment} className = "container-cards-cardapio">
-                        
+                        <CardRestaurante rest={restaurantes}/>
 
-                        <div className="cards">
-                            <h5> <b>{restaurantes.name_estab}</b></h5>
-                            <p>Email: {restaurantes.email}</p>
-                            
-                            {restaurantes.delivery_fee ? (<p>Frete grátis!</p>) : (<p>Preço do frete: R$ 2,00</p>)}
-                            <p></p>
-                            <Link to = "/homeUser/compras">
-                                <button name="id_establishment" type="submit" onClick={ this.sendIdCompras } value={ restaurantes.id_establishment } className="btn btn-primary" >  Ver mais </button>
-                            </Link>
-                            
-                        </div>
                     </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                     ))
                 }

@@ -56,7 +56,7 @@ export default class HomeRestaurante extends Component {
     removeDish = (e) => {
         const id_dish = e.target.value
 
-        api.delete('/dishes/'+  id_dish)
+        api.delete('/dishes/' + id_dish)
         .then(e  => {
             console.log('removido')
             window.location.reload(false)
