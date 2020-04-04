@@ -65,6 +65,19 @@ export default class HomeRestaurante extends Component {
          })
     }
 
+    updDish = (e) => {
+        const id_dish = e.target.value
+        var value_dish = prompt("Digite o novo valor do produto")
+
+        api.put('/dishes/' + id_dish, { value_dish })
+        .then(e  => {
+            window.location.reload(false)
+         }).catch(err => {
+             console.log(err)
+         })
+    
+    }
+
 
     render() {
         return (
@@ -100,7 +113,8 @@ export default class HomeRestaurante extends Component {
                                         <p>Preço: R$ {dishes.value_dish}</p>
                                         <p>Descrição: {dishes.description_dish}</p>
                                         <p></p>
-                                        <button type="submit" value={ dishes.id_dish } onClick={this.removeDish} className="btn btn-primary" >Remover</button>
+                                        <button id="buttonRest" type="submit" value={ dishes.id_dish } onClick={ this.updDish } className="btn btn-primary" >Editar</button>
+                                        <button id="buttonRest" type="submit" value={ dishes.id_dish } onClick={ this.removeDish } className="btn btn-primary" >Remover</button>
                                     </div>
                                 </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                                 ))

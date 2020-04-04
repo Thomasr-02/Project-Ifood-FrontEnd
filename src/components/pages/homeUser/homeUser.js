@@ -11,7 +11,8 @@ export default class Home extends Component {
         restaurantes: [],
         search: '',
         id_establishment: 0,
-        pratos: []
+        pratos: [],
+        rest_barato: []
     }
 
     Logout() {
@@ -68,8 +69,8 @@ export default class Home extends Component {
         })
     }
 
-    mostPopular = () => {
-        api.get('/restaurantes/mostpopular/')
+    mostPedidos = () => {
+        api.get('/restaurantes/mostpopular/'+ 5)
         .then(res => {
             const restaurantes = res.data;
             console.log(restaurantes)
@@ -82,17 +83,55 @@ export default class Home extends Component {
         })
     }
 
-    promocoes = () => {
-        api.get('/restaurantes/bestcheap/'+ this.state.id_establishment)
-        .then(res => {
+    mostPopular = async () => {
+        var rest_barato = []
+        var i=0
+
+        await this.state.restaurantes.map(rest => {
+            api.get('/restaurantes/bestcheap/'+ rest.id_establishment)
+            .then(res => {
+                console.log(res.data[0].max)
+                if (parseInt(res.data[0].max) <= 10) {
+                    api.get('/restaurantes/'+ rest.id_establishment).then(rest =>{
+                        console.log(rest)
+                        rest_barato = rest_barato.concat(rest.data)
+                        this.setState({ restaurantes: rest_barato })
+
+                    })
+                    
+                }
+    
+            }).catch(err => {
+                console.log(err)
+    
+            })
+
+        })
+        console.log(rest_barato)
+        
+        this.setState({ pratos: [] })
+       
+        console.log(this.state.restaurantes)
+        
+    }
+
+    findDeliveryFree = () => {
+        api.get('restaurantes/delivery/' + true).then(res => {
+            console.log(res)
             const restaurantes = res.data;
-            console.log(restaurantes)
+
             this.setState({ pratos: [] })
             this.setState({ restaurantes })
+        })
+    }
 
-        }).catch(err => {
-            console.log(err)
-
+    findDeliveryFast = () => {
+        api.get('restaurantes/delivery/' + false).then(res => {
+            console.log(res)
+            const restaurantes = res.data;
+            
+            this.setState({ pratos: [] })
+            this.setState({ restaurantes })
         })
     }
 
@@ -125,11 +164,11 @@ export default class Home extends Component {
                     
                     <ul className="ulCategorias">
                         <h5>Categorias</h5>
-                        <li><button className="button-star">Mais pedidos</button></li>
+                        <li><button onClick={ this.mostPedidos } className="button-star">Mais pedidos</button></li>
                         <li><button onClick={ this.promocoes } className="button-star">Promoções</button></li>
-                        <li><button className="button-star">Entrega grátis</button></li>
+                        <li><button onClick={ this.findDeliveryFree } className="button-star">Entrega grátis</button></li>
                         <li><button onClick={ this.mostPopular } className="button-star">Restaurante popular</button></li>
-                        <li><button  className="button-star">Entrega rápida</button></li>
+                        <li><button  onClick={ this.findDeliveryFast }className="button-star">Entrega rápida</button></li>
                     </ul>
                     
                 </div>
@@ -139,7 +178,7 @@ export default class Home extends Component {
                 <h3>Pesquisa</h3>
                 <br></br>
                 { 
-                    this.state.restaurantes.reverse().map (restaurantes => (    
+                    this.state.restaurantes.map (restaurantes => (    
                     <div key={restaurantes.id_establishment} className = "container-cards-cardapio">
                         <CardRestaurante rest={restaurantes}/>
 

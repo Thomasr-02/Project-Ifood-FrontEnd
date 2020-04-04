@@ -6,7 +6,7 @@ export class CardRestaurante extends Component {
     sendIdCompras = (e) => {
 
         intermediador.idRest(e.target.value, "set")
-        intermediador.idUser()
+        // intermediador.idUser()
     }
 
     render() {
@@ -25,7 +25,7 @@ export class CardRestaurante extends Component {
                 </div>
             )
         }
-        else {
+        else if (this.props.rest.status === false || this.props.rest.status === null ) {
             return (
                 <div className="cards">
                     <h5> <b>{this.props.rest.name_estab}</b></h5>
@@ -35,6 +35,22 @@ export class CardRestaurante extends Component {
                     <p></p>
                     <h4>Este restaurante está fechado!</h4>
                             
+                </div>
+            )
+        }
+        else if (this.props.rest.quantidade !== null || this.props.rest.quantidade !== undefined) {
+            return (
+                <div className="cards">
+                    <h5> <b>{this.props.rest.name_estab}</b></h5>
+                    <p>Prato: { this.props.rest.name_dish } </p>
+                    <p>Quantidade: { this.props.rest.quantidade }</p>
+                    <p></p>
+                    
+                    <Link to = "/homeUser/compras">
+                        <button name="id_establishment" type="submit" onClick={ this.sendIdCompras } value={ this.props.rest.id_establishment } className="btn btn-primary" >  Ver mais </button>
+                    </Link>
+
+
                 </div>
             )
         }

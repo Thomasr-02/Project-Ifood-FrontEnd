@@ -3,6 +3,7 @@ import Modal from 'react-awesome-modal';
 import api from '../../../services/api'
 import intermediador from './intermediador'
 import './compras.css'
+import { isId_estab, TOKEN_KEY2 } from '../../../services/auth.js'
 
 export default class Compras extends Component  {
     state = {
@@ -10,7 +11,7 @@ export default class Compras extends Component  {
         delivery_fee: false,
         email: '',
         id_restaurante: intermediador.idRest(0, "get"),
-        id_person: intermediador.idUser(0, "get"),
+        id_person: isId_estab(TOKEN_KEY2),
 
         dishes: [],
         carrinho: [],
@@ -67,7 +68,6 @@ export default class Compras extends Component  {
 
     mostraModal = () => {
         this.setState({ visible: true })
-        console.log(this.state.id_person)
 
         api.get("/users/" + this.state.id_person).then((res) => {
             const person = res.data
@@ -222,13 +222,19 @@ export default class Compras extends Component  {
     voltar = ()  => {
         this.props.history.push('/homeUser/')
     }
+
+    changeEndereco =(e) => {
+        // var street = document.getElementById("street").value
+        document.getElementById("street").value = e.target.value
+        console.log(e.target.value)
+    }
     
     render() {
         return (
             <div className="Compras">
                 <div className="info-restaurante">
                     <h2>{this.state.name_estab}</h2>    
-                    {this.state.delivery_fee ? (<p>Frete grátis!</p>) : (<p>Preço do frete: R$ 2,00</p>)}
+                    {this.state.delivery_fee ? (<p>Frete grátis!</p>) : (<p>Preço do frete: R$ 4,00</p>)}
                     <p>Email: {this.state.email}</p>
                 </div>
                 <button onClick={ this.voltar }>Voltar</button>
@@ -268,7 +274,7 @@ export default class Compras extends Component  {
                                         <div className="container-info-endereco">
                                             <form className="form-info-endereco">
                                                 <b>Rua</b>
-                                                <input className="form-info-endereco" value={person.street} ></input>
+                                                <input id="street" type="text" onChange={ this.changeEndereco } className="form-info-endereco" value={person.street} ></input>
 
                                                 <b>Bairro</b>
                                                 <input className="form-info-endereco" value={person.neighborhood} ></input>

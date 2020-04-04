@@ -32,7 +32,10 @@ export class Login extends Component {
               if (response.data[0].id_person !== undefined) {
                   login(response.data.token);
                   intermediador.idUser(response.data[0].id_person, "set")
-                  localStorage.setItem(TOKEN_KEY2, response.data[0].id_establishment);
+                  console.log(response.data[0].id_person)
+                  console.log(intermediador.idUser(response.data[0].id_person, "set"))
+
+                  localStorage.setItem(TOKEN_KEY2, response.data[0].id_person);
                   this.props.history.push("/homeUser");
                   
               }
